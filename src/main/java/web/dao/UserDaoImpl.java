@@ -3,11 +3,6 @@ package web.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
 import org.bson.Document;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
@@ -16,11 +11,11 @@ import com.mongodb.client.model.Filters;
 import web.model.User;
 import web.model.UserFactory;
 
-@Path("/users")
 public class UserDaoImpl implements UserDao{
 
 	public void insertOneUserToDb(User user) {
 		// TODO Auto-generated method stub
+		
 		
 		MongoDaoFactory
 		.getDatabase(UserDao.MONGO_DATABASE_NAME)
@@ -44,9 +39,7 @@ public class UserDaoImpl implements UserDao{
 		.insertMany(documents);
 		
 	}
-
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	
 	public List<User> findAll() {
 		// TODO Auto-generated method stub
 		final List<User> users = new ArrayList<User>();
@@ -70,22 +63,27 @@ public class UserDaoImpl implements UserDao{
 		
 	}
 
-	public void findOneUserFromDb(User user) {
+	public List<User> findUserByEmail(String email) {
 		// TODO Auto-generated method stub
+		
+		final List<User> users = new ArrayList<User>();
 		
 		FindIterable<Document> documentIterator = MongoDaoFactory
 				.getDatabase(UserDao.MONGO_DATABASE_NAME)
 				.getCollection(UserDao.MONGO_COLLECTION_USERS)
-				.find(Filters.eq("email", user.getEmail()));
+				.find(Filters.eq(UserDao.MONGO_USERS_EMAIL, email));
 		
 		documentIterator.forEach(new Block<Document>() {
 
 			public void apply(Document document) {
 				// TODO Auto-generated method stub
+				users.add(UserFactory.converDocumentToPojo(document));
 				System.out.println(document);
 			}
 			
 		});
+		
+		return users;
 		
 	}
 
@@ -95,7 +93,7 @@ public class UserDaoImpl implements UserDao{
 		MongoDaoFactory
 		.getDatabase(MONGO_DATABASE_NAME)
 		.getCollection(MONGO_COLLECTION_USERS)
-		.updateOne(Filters.eq("email", user.getEmail()), UserFactory.convertPojoToDocument(user));
+		.updateOne(Filters.eq(UserDao.MONGO_USERS_EMAIL, user.getEmail()), new Document("$set", UserFactory.convertPojoToDocument(user)));
 		
 	}
 
@@ -109,13 +107,13 @@ public class UserDaoImpl implements UserDao{
 		
 	}
 
-	public void deleteOneUserFromDb(User user) {
+	public void deleteOneUserFromDb(String email) {
 		// TODO Auto-generated method stub
 		
 		MongoDaoFactory
 		.getDatabase(MONGO_DATABASE_NAME)
 		.getCollection(MONGO_COLLECTION_USERS)
-		.deleteOne(UserFactory.convertPojoToDocument(user));
+		.deleteOne(new Document(UserDao.MONGO_USERS_EMAIL, email));
 		
 	}
 }

@@ -31,7 +31,7 @@ public class FrontController extends HttpServlet{
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String nextPage = req.getPathInfo();
+//		String nextPage = req.getPathInfo();
 		
 	}
 	

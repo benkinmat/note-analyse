@@ -7,7 +7,6 @@ public abstract class DaoFactory {
 	public static final int ORACLE_DATABASE = 3;
 
 	public abstract UserDao getUserDao();
-//	public abstract u
 	
 	public static DaoFactory getDaoFactory(int factoryId){
 		

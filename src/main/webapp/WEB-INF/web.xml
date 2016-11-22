@@ -27,7 +27,7 @@
 	 	
 	 	<init-param>  
 	  		<param-name>com.sun.jersey.config.property.packages</param-name>  
-	  		<param-value>web.dao</param-value>  
+	  		<param-value>web.controller</param-value>  
 	 	</init-param>  
 	 	<init-param>  
 	  		<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>  
@@ -41,14 +41,6 @@
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>FrontController</servlet-name>
-		<servlet-class>web.controller.FrontController</servlet-class>
-	</servlet> 
-	<servlet-mapping>
-		<servlet-name>FrontController</servlet-name>
-		<url-pattern>/frontController</url-pattern>
-	</servlet-mapping>
 	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

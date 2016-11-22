@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import web.model.User;
-import web.model.UserImpl;
 
 public class AppDao {
 
@@ -13,12 +12,14 @@ public class AppDao {
 		
 		UserDao userDao = new MongoDaoFactory().getUserDao();
 //		User user = new User("user1", "user1@gmail.com");
-		User user = UserImpl.getInstance("user1", "user1@gmail.com");
+		User user = User.getInstance("user3_bonus", "user3@gmail.com");
+		
+		userDao.updateOneUserToDb(user);
 		
 //		userDao.insertOneUserToDb(user);
 //		userDao.deleteOneUserFromDb(user);
 //		userDao.findOneUserFromDb(user);
-		userDao.findAll();
+//		userDao.findAll();
 //		userDao.deleteAll();
 		
 	}
