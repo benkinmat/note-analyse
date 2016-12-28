@@ -15,8 +15,7 @@ public class UserDaoImpl implements UserDao{
 
 	public void insertOneUserToDb(User user) {
 		// TODO Auto-generated method stub
-		
-		
+			
 		MongoDaoFactory
 		.getDatabase(UserDao.MONGO_DATABASE_NAME)
 		.getCollection(UserDao.MONGO_COLLECTION_USERS)

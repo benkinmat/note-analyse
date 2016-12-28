@@ -12,21 +12,23 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import web.dao.DaoFactory;
-import web.dao.MongoDaoFactory;
 import web.dao.UserDao;
 import web.model.User;
 
 @Path("/users")
 public class UserControllerImp implements UserController{
 	
-	DaoFactory dao = new MongoDaoFactory();
-	UserDao userDao = dao.getUserDao();
+//	DaoFactory dao = new MongoDaoFactory();
+//	UserDao userDao = dao.getUserDao();
+	
+	UserDao userDao = DaoFactory
+			.getDaoFactory(DaoFactory.MONGO_DATABASE)
+			.getUserDao();
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public void addUsers(User user) {
+	public void addUser(User user) {
 		// TODO Auto-generated method stub
-		System.out.println(user.getUsername() + user.getEmail());
 		userDao.insertOneUserToDb(user);
 		
 	}

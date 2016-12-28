@@ -12,6 +12,11 @@ public final class MongoDaoFactory extends DaoFactory{
 		// TODO Auto-generated method stub
 		return new UserDaoImpl();
 	}
+	
+	@Override
+	public NoteDao getNoteDao(){
+		return new NoteDaoImpl();
+	}
 		
 	public static MongoDatabase getDatabase(String databaseName){
 		

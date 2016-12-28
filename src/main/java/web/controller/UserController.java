@@ -6,7 +6,7 @@ import web.model.User;
 
 public interface UserController{
 	
-	public void addUsers(User user);	
+	public void addUser(User user);	
 //	public void insertManyUsersToDb(List<User> users);
 	
 	public List<User> getUserByEmail(String email);
