@@ -1,11 +1,24 @@
 package web.dao;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 
 public final class MongoDaoFactory extends DaoFactory{
+	private final static String MONGO_REMOTE_USER = "root";
+	private final static String MONGO_REMOTE_PASSWORD = "*Root123#";
+	private final static String MONGO_REMOTE_ADDRESS = "ds013366.mlab.com";
+	private final static int MONGO_REMOTE_PORT = 13366;
+	private final static String MONGO_REMOTE_DATABASE = "heroku_6fklfcpw";
 	
-	public static MongoClient mongoClient = new MongoClient();
+	//mongodb://user:pass@host:port/db
+	public final static MongoClientURI mongoClientUri = 
+			new MongoClientURI("mongodb://" + MONGO_REMOTE_USER 
+					+ ":" + MONGO_REMOTE_PASSWORD 
+					+ "@" + MONGO_REMOTE_ADDRESS 
+					+ ":" + MONGO_REMOTE_PORT 
+					+ "/" + MONGO_REMOTE_DATABASE);
+	public static MongoClient mongoClient = new MongoClient(mongoClientUri);
 	
 	@Override
 	public UserDao getUserDao() {

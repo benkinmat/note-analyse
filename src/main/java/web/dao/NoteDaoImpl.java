@@ -18,7 +18,7 @@ public class NoteDaoImpl implements NoteDao{
 		final List<Note> notes = new ArrayList<Note>();
 		
 		FindIterable<Document> documentIterator = MongoDaoFactory
-				.getDatabase(NoteDao.MONGO_DATABASE_NAME)
+				.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
 				.getCollection(NoteDao.MONGO_COLLECTION_NOTES)
 				.find();
 		
@@ -40,7 +40,7 @@ public class NoteDaoImpl implements NoteDao{
 		// TODO Auto-generated method stub
 		
 		MongoDaoFactory
-		.getDatabase(NoteDao.MONGO_DATABASE_NAME)
+		.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
 		.getCollection(NoteDao.MONGO_COLLECTION_NOTES)
 		.insertOne(NoteFactory.convertPojoToDocument(note));
 		
@@ -50,7 +50,7 @@ public class NoteDaoImpl implements NoteDao{
 		// TODO Auto-generated method stub
 		
 		MongoDaoFactory
-		.getDatabase(NoteDao.MONGO_DATABASE_NAME)
+		.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
 		.getCollection(NoteDao.MONGO_COLLECTION_NOTES)
 		.deleteMany(new Document());
 	}

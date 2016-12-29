@@ -5,7 +5,6 @@ import java.util.List;
 import web.model.User;
 
 public interface UserDao {
-	public static final String MONGO_DATABASE_NAME = "note";
 	public static final String MONGO_COLLECTION_USERS = "users";
 	public static final String MONGO_USERS_EMAIL = "email";
 	public static final String MONGO_USERS_USERNAME = "username";

@@ -17,7 +17,7 @@ public class UserDaoImpl implements UserDao{
 		// TODO Auto-generated method stub
 			
 		MongoDaoFactory
-		.getDatabase(UserDao.MONGO_DATABASE_NAME)
+		.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
 		.getCollection(UserDao.MONGO_COLLECTION_USERS)
 		.insertOne(UserFactory.convertPojoToDocument(user));
 		
@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao{
 		}
 		
 		MongoDaoFactory
-		.getDatabase(UserDao.MONGO_DATABASE_NAME)
+		.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
 		.getCollection(UserDao.MONGO_COLLECTION_USERS)
 		.insertMany(documents);
 		
@@ -44,7 +44,7 @@ public class UserDaoImpl implements UserDao{
 		final List<User> users = new ArrayList<User>();
 		
 		FindIterable<Document> documentIterator = MongoDaoFactory
-				.getDatabase(UserDao.MONGO_DATABASE_NAME)
+				.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
 				.getCollection(UserDao.MONGO_COLLECTION_USERS)
 				.find();
 		
@@ -68,7 +68,7 @@ public class UserDaoImpl implements UserDao{
 		final List<User> users = new ArrayList<User>();
 		
 		FindIterable<Document> documentIterator = MongoDaoFactory
-				.getDatabase(UserDao.MONGO_DATABASE_NAME)
+				.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
 				.getCollection(UserDao.MONGO_COLLECTION_USERS)
 				.find(Filters.eq(UserDao.MONGO_USERS_EMAIL, email));
 		
@@ -90,7 +90,7 @@ public class UserDaoImpl implements UserDao{
 		// TODO Auto-generated method stub
 		
 		MongoDaoFactory
-		.getDatabase(MONGO_DATABASE_NAME)
+		.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
 		.getCollection(MONGO_COLLECTION_USERS)
 		.updateOne(Filters.eq(UserDao.MONGO_USERS_EMAIL, user.getEmail()), new Document("$set", UserFactory.convertPojoToDocument(user)));
 		
@@ -100,7 +100,7 @@ public class UserDaoImpl implements UserDao{
 		// TODO Auto-generated method stub
 		
 		MongoDaoFactory
-		.getDatabase(MONGO_DATABASE_NAME)
+		.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
 		.getCollection(MONGO_COLLECTION_USERS)
 		.deleteMany(new Document());
 		
@@ -110,7 +110,7 @@ public class UserDaoImpl implements UserDao{
 		// TODO Auto-generated method stub
 		
 		MongoDaoFactory
-		.getDatabase(MONGO_DATABASE_NAME)
+		.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
 		.getCollection(MONGO_COLLECTION_USERS)
 		.deleteOne(new Document(UserDao.MONGO_USERS_EMAIL, email));
 		
