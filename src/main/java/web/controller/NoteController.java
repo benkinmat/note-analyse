@@ -10,4 +10,8 @@ public interface NoteController {
 	
 	public List<Note> getAllNotes();
 	
+	public Note getNoteById(String noteId);
+	
+	public void deleteNoteById(String noteId);
+	
 }

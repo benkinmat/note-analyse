@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Note {
 
+	private String _id;
 	private String email;
 	private String header;
 	private String description;
@@ -15,6 +16,15 @@ public class Note {
 		super();
 	}
 
+
+	public String get_id() {
+		return _id;
+	}
+
+	public void set_id(String _id) {
+		this._id = _id;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -55,8 +65,9 @@ public class Note {
 		this.data = data;
 	}
 
-	private Note(String email, String header, String description, String content, ArrayList<Object> data) {
+	private Note(String _id, String email, String header, String description, String content, ArrayList<Object> data) {
 		super();
+		this._id = _id;
 		this.email = email;
 		this.header = header;
 		this.description = description;
@@ -64,8 +75,8 @@ public class Note {
 		this.data = data;
 	}
 		
-	public static Note getInstance(String email, String header, String description, String content, ArrayList<Object> data) {
-		return new Note(email, header, description, content, data);
+	public static Note getInstance(String _id, String email, String header, String description, String content, ArrayList<Object> data) {
+		return new Note(_id, email, header, description, content, data);
 	}
 	
 }

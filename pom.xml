@@ -64,6 +64,6 @@
 	</dependency>		
   </dependencies>
   <build>
-    <finalName>App</finalName>
+    <finalName>note-analyse</finalName>
   </build>
 </project>

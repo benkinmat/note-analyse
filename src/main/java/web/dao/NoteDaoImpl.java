@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.model.Filters;
 
 import web.model.Note;
 import web.model.NoteFactory;
@@ -36,6 +38,29 @@ public class NoteDaoImpl implements NoteDao{
 		
 	}
 
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
+		MongoDaoFactory
+		.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
+		.getCollection(NoteDao.MONGO_COLLECTION_NOTES)
+		.deleteMany(new Document());
+	}
+
+	public Note findNoteById(String id) {
+		// TODO Auto-generated method stub
+		
+		Document noteDoc = MongoDaoFactory
+				.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
+				.getCollection(NoteDao.MONGO_COLLECTION_NOTES)
+				.find(Filters.eq(NoteDao.MONGO_NOTE_ID, new ObjectId(id)))
+				.first();
+		
+		Note note = (noteDoc != null) ? NoteFactory.converDocumentToPojo(noteDoc) : null;
+		
+		return note;
+	}
+
 	public void insertOneNoteToDb(Note note) {
 		// TODO Auto-generated method stub
 		
@@ -46,13 +71,14 @@ public class NoteDaoImpl implements NoteDao{
 		
 	}
 
-	public void deleteAll() {
+	public void deleteById(String id) {
 		// TODO Auto-generated method stub
 		
 		MongoDaoFactory
 		.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
 		.getCollection(NoteDao.MONGO_COLLECTION_NOTES)
-		.deleteMany(new Document());
+		.deleteOne(Filters.eq(NoteDao.MONGO_NOTE_ID, new ObjectId(id)));
+		
 	}
 
 }
