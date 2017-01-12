@@ -7,6 +7,7 @@ import com.mongodb.client.MongoDatabase;
 import web.utilities.Config;
 
 public final class MongoDaoFactory extends DaoFactory{
+	
 	private final static String MONGO_REMOTE_USER = 
 			Config.getMongoRemoteUser();
 	private final static String MONGO_REMOTE_PASSWORD = 
@@ -36,6 +37,11 @@ public final class MongoDaoFactory extends DaoFactory{
 	@Override
 	public NoteDao getNoteDao(){
 		return new NoteDaoImpl();
+	}
+	
+	@Override
+	public BlogDao getBlogDao(){
+		return new BlogDaoImpl();
 	}
 		
 	public static MongoDatabase getDatabase(String databaseName){

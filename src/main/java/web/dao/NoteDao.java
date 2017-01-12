@@ -13,13 +13,13 @@ public interface NoteDao {
 	public static final String MONGO_NOTE_CONTENT = "content";
 	public static final String MONGO_NOTE_DATA = "data";
 
-	public void insertOneNoteToDb(Note note);	
+	public void insertOneToDb(Note note);	
 //	public void insertManyUsersToDb(List<User> users);
 	
 	public List<Note> findAll();	
-	public Note findNoteById(String id);
+	public Note findById(String id);
 	
-//	public void updateOneUserToDb(User user);
+	public void updateOneToDb(Note note);
 //	public void updateManyUserToDb(List<User> users);
 //	
 	public void deleteAll();

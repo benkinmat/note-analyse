@@ -47,7 +47,7 @@ public class NoteDaoImpl implements NoteDao{
 		.deleteMany(new Document());
 	}
 
-	public Note findNoteById(String id) {
+	public Note findById(String id) {
 		// TODO Auto-generated method stub
 		
 		Document noteDoc = MongoDaoFactory
@@ -61,7 +61,7 @@ public class NoteDaoImpl implements NoteDao{
 		return note;
 	}
 
-	public void insertOneNoteToDb(Note note) {
+	public void insertOneToDb(Note note) {
 		// TODO Auto-generated method stub
 		
 		MongoDaoFactory
@@ -78,6 +78,16 @@ public class NoteDaoImpl implements NoteDao{
 		.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
 		.getCollection(NoteDao.MONGO_COLLECTION_NOTES)
 		.deleteOne(Filters.eq(NoteDao.MONGO_NOTE_ID, new ObjectId(id)));
+		
+	}
+
+	public void updateOneToDb(Note note) {
+		// TODO Auto-generated method stub
+		
+		MongoDaoFactory
+		.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
+		.getCollection(NoteDao.MONGO_COLLECTION_NOTES)
+		.updateOne(Filters.eq(NoteDao.MONGO_NOTE_ID, new ObjectId(note.get_id())), new Document("$set", NoteFactory.convertPojoToDocument(note)));
 		
 	}
 

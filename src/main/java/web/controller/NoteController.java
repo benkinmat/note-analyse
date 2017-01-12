@@ -12,6 +12,8 @@ public interface NoteController {
 	
 	public Note getNoteById(String noteId);
 	
+	public void updateOneNote(Note note);
+	
 	public void deleteNoteById(String noteId);
 	
 }

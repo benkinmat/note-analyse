@@ -8,6 +8,7 @@ public abstract class DaoFactory {
 
 	public abstract UserDao getUserDao();
 	public abstract NoteDao getNoteDao();
+	public abstract BlogDao getBlogDao();
 	
 	public static DaoFactory getDaoFactory(int factoryId){
 		
