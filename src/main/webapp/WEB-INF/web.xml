@@ -27,18 +27,21 @@
 
 	<servlet>
 		<servlet-name>jersey-servlet</servlet-name>
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 
 		<init-param>
-			<param-name>com.sun.jersey.config.property.packages</param-name>
-			<param-value>web.controller</param-value>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>
+				web.controller,
+				web.filter
+			</param-value>
 		</init-param>
 		<init-param>
-			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-			<param-value>true</param-value>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>web.Application</param-value>
 		</init-param>
 		<init-param>
-			<param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+			<param-name>javax.ws.rs.container.ContainerRequestFilter</param-name>
 			<param-value>web.filter.TokenRequestFilter</param-value>
 		</init-param>
 
