@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public final class Config {
+public final class Configuration {
 	
 	private final static Properties props = init();
 	
-	private Config(){
+	private Configuration(){
 		throw new AssertionError();
 	}
 
@@ -19,7 +19,7 @@ public final class Config {
 		InputStream inputStream = null;
 		
 		try {			
-			inputStream = Config.class.getClassLoader().getResourceAsStream(propFileName);
+			inputStream = Configuration.class.getClassLoader().getResourceAsStream(propFileName);
 			
 			if(inputStream != null){
 				prop.load(inputStream);
@@ -62,6 +62,22 @@ public final class Config {
 	
 	public static String getMongoRemoteDatabase(){
 		return props.getProperty("HEROKU_MONGO_REMOTE_DATABASE");
+	}
+	
+	public static String getJwtTokenIssuer(){
+		return props.getProperty("JWT_TOKEN_ISSUER");
+	}
+	
+	public static String getJwtTokenSign(){
+		return props.getProperty("JWT_TOKEN_SIGN");
+	}
+	
+	public static String getJwtSubject(){
+		return props.getProperty("JWT_TOKEN_SUBJECT");
+	}
+	
+	public static String getJwtClaimRole(){
+		return props.getProperty("JWT_TOKEN_ROLE");
 	}
 	
 }

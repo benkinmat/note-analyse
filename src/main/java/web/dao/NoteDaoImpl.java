@@ -29,7 +29,6 @@ public class NoteDaoImpl implements NoteDao{
 			public void apply(Document document) {
 				// TODO Auto-generated method stub
 				notes.add(NoteFactory.converDocumentToPojo(document));
-				System.out.println(document);
 			}
 			
 		});

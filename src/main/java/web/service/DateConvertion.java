@@ -1,7 +1,6 @@
 package web.service;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,23 +25,5 @@ public class DateConvertion extends JsonDeserializer<Date>{
 			// TODO Auto-generated catch block
 			throw new RuntimeException(e);
 		}
-	}
-
-	
-	public static Date serialize(Date date){
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date dateParse = null;
-		
-		System.out.println(date);
-		
-		try {
-			dateParse = dateFormat.parse(date.toString());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return dateParse;
-		
 	}
 }

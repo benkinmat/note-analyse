@@ -40,7 +40,6 @@ public class BlogDaoImpl implements BlogDao {
 			public void apply(Document document) {
 				// TODO Auto-generated method stub
 				blogs.add(BlogFactory.converDocumentToPojo(document));
-				System.out.println(document);
 			}
 			
 		});
