@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public final class Configuration {
+public final class ConfigurationInfo {
 	
 	private final static Properties props = init();
 	
-	private Configuration(){
+	private ConfigurationInfo(){
 		throw new AssertionError();
 	}
 
@@ -19,7 +19,7 @@ public final class Configuration {
 		InputStream inputStream = null;
 		
 		try {			
-			inputStream = Configuration.class.getClassLoader().getResourceAsStream(propFileName);
+			inputStream = ConfigurationInfo.class.getClassLoader().getResourceAsStream(propFileName);
 			
 			if(inputStream != null){
 				prop.load(inputStream);
@@ -72,12 +72,28 @@ public final class Configuration {
 		return props.getProperty("JWT_TOKEN_SIGN");
 	}
 	
-	public static String getJwtSubject(){
-		return props.getProperty("JWT_TOKEN_SUBJECT");
+	public static long getJwtLeeWay(){
+		return Long.parseLong(props.getProperty("JWT_TOKEN_LEEWAY"));
+	}
+	
+	public static long getJwtTokenExp(){
+		return Long.parseLong(props.getProperty("JWT_TOKEN_EXP"));
 	}
 	
 	public static String getJwtClaimRole(){
 		return props.getProperty("JWT_TOKEN_ROLE");
+	}
+	
+	public static String getHostGmailUser(){
+		return props.getProperty("HOST_GMAIL_USER");
+	}
+	
+	public static String getHostGmailPassword(){
+		return props.getProperty("HOST_GMAIL_PASSWORD");
+	}
+	
+	public static String getHostGmailSubject(){
+		return props.getProperty("HOST_GMAIL_SUBJECT");
 	}
 	
 }

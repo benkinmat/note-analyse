@@ -2,6 +2,7 @@ package web.controller;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,10 +17,8 @@ import web.dao.UserDao;
 import web.model.User;
 
 @Path("/users")
+@RolesAllowed("ADMIN")
 public class UserControllerImp implements UserController{
-	
-//	DaoFactory dao = new MongoDaoFactory();
-//	UserDao userDao = dao.getUserDao();
 	
 	UserDao userDao = DaoFactory
 			.getDaoFactory(DaoFactory.MONGO_DATABASE)

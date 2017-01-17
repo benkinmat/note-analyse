@@ -4,7 +4,7 @@ import java.security.Principal;
 
 public class User implements Principal{
 
-	private String username;
+	private String _id;
 	private String email;
 	private String password;
 	private String role;
@@ -13,18 +13,21 @@ public class User implements Principal{
 		super();
 	}
 
-	private User(String username, String email) {
+	private User(String _id, String email, String password, String role) {
 		super();
-		this.username = username;
+		
+		this._id = _id;
 		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
+	
+	public String get_id() {
+		return _id;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	public void set_id(String _id) {
+		this._id = _id;
 	}
 
 	public String getEmail() {
@@ -51,12 +54,12 @@ public class User implements Principal{
 		this.password = password;
 	}
 
-	public static User getInstance(String username, String email) {
-		return new User(username, email);
+	public static User getInstance(String _id, String username, String email, String role) {
+		return new User(_id, username, email, role);
 	}
 
 	public String getName() {
 		// TODO Auto-generated method stub
-		return this.username + "@" + this.email;
+		return this.email;
 	}
 }

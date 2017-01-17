@@ -1,33 +1,63 @@
 package web.service;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
+
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTCreationException;
-import web.utilities.Configuration;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 
-public class TokenGenerator {
+import web.model.User;
+import web.utilities.ConfigurationInfo;
 
-	public static void main(String[] args) throws IllegalArgumentException, JWTCreationException, UnsupportedEncodingException {
-		// TODO Auto-generated method stub
+public final class TokenGenerator {
+	private static final String issuer = ConfigurationInfo.getJwtTokenIssuer();
+	private static final String role = ConfigurationInfo.getJwtClaimRole();
+	private static final long exp = ConfigurationInfo.getJwtTokenExp();
+	private static final long leeway = ConfigurationInfo.getJwtLeeWay();
+	private static final String sign = ConfigurationInfo.getJwtTokenSign();
+	
+	public static final String getJwtToken(User user){
+		String token = null;
 		
-		String token = JWT.create()
-		        .withIssuer(Configuration.getJwtTokenIssuer())
-		        .withSubject(Configuration.getJwtSubject())
-		        .withClaim(Configuration.getJwtClaimRole(), "USER")
-		        .sign(Algorithm.HMAC256(Configuration.getJwtTokenSign()));
+		if (user != null){
+			try {
+				token = JWT.create()
+				        .withIssuer(issuer)
+				        .withClaim(role, user.getRole())
+				        .withExpiresAt(new Date())
+				        .sign(Algorithm.HMAC256(sign));
+				
+				System.out.println(token);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 		
-//		String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJibG9nIiwiYWRtaW5pc3RyYXRvciI6dHJ1ZSwiaXNzIjoidHVhbmFuaGhvZGllbiJ9.Qn3_SrcVKF2oFs05L15qPtxLbK62kqR4SZzoFJfI0Pk";
+		return token;
+	}
+	
+	public static final boolean isTokenValid(String token){
+		try {
+			verify(token);
+			
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			return false;
+		}
+	}
+	
+	public static final DecodedJWT verify(String token) throws IllegalArgumentException, UnsupportedEncodingException, JWTVerificationException{
+		JWTVerifier verifier = JWT.require(Algorithm.HMAC256(sign))
+				.withIssuer(issuer)
+		        .acceptLeeway(leeway)
+		        .acceptExpiresAt(exp)
+				.build();
 		
-//		JWTVerifier verifier = JWT.require(Algorithm.HMAC256("secret"))
-//				.withIssuer(Configuration)
-//				.withSubject("blog")
-//				.withClaim("administrator", true)
-//				.build();
-//		
-//		DecodedJWT jwt = verifier.verify(token);
-		
-		System.out.println(token);
+		return verifier.verify(token);
 		
 	}
-
 }

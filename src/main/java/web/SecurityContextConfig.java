@@ -1,15 +1,17 @@
-package web.service;
+package web;
 
 import java.security.Principal;
 
+import javax.ws.rs.core.SecurityContext;
+
 import web.model.User;
 
-public class SecurityContext implements javax.ws.rs.core.SecurityContext{
+public class SecurityContextConfig implements SecurityContext{
 	
 	User user;
 	String scheme;
 
-	public SecurityContext(User user) {
+	public SecurityContextConfig(User user) {
 		super();
 		this.user = user;
 	}

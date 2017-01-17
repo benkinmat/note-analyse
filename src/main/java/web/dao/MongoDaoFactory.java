@@ -4,20 +4,20 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 
-import web.utilities.Configuration;
+import web.utilities.ConfigurationInfo;
 
 public final class MongoDaoFactory extends DaoFactory{
 	
 	private final static String MONGO_REMOTE_USER = 
-			Configuration.getMongoRemoteUser();
+			ConfigurationInfo.getMongoRemoteUser();
 	private final static String MONGO_REMOTE_PASSWORD = 
-			Configuration.getMongoRemotePass();
+			ConfigurationInfo.getMongoRemotePass();
 	private final static String MONGO_REMOTE_ADDRESS = 
-			Configuration.getMongoRemoteAddr();
+			ConfigurationInfo.getMongoRemoteAddr();
 	private final static int MONGO_REMOTE_PORT = 
-			Configuration.getMongoRemotePort();
+			ConfigurationInfo.getMongoRemotePort();
 	private final static String MONGO_REMOTE_DATABASE = 
-			Configuration.getMongoRemoteDatabase();
+			ConfigurationInfo.getMongoRemoteDatabase();
 	
 	//mongodb://user:pass@host:port/db
 	public final static MongoClientURI mongoClientUri = 

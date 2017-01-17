@@ -38,7 +38,7 @@
 		</init-param>
 		<init-param>
 			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>web.Application</param-value>
+			<param-value>web.ApplicationConfig</param-value>
 		</init-param>
 		<init-param>
 			<param-name>javax.ws.rs.container.ContainerRequestFilter</param-name>

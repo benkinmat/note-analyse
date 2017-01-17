@@ -115,4 +115,19 @@ public class UserDaoImpl implements UserDao{
 		.deleteOne(new Document(UserDao.MONGO_USERS_EMAIL, email));
 		
 	}
+
+	public User authenticate(String email, String password) {
+		// TODO Auto-generated method stub
+		
+		Document userDoc =  MongoDaoFactory
+				.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
+				.getCollection(UserDao.MONGO_COLLECTION_USERS)
+				.find(Filters.and(Filters.eq(UserDao.MONGO_USERS_EMAIL, email), Filters.eq(UserDao.MONGO_USERS_PASSWORD, password)))
+				.first();
+				
+		User user = (userDoc != null) ? UserFactory.converDocumentToPojo(userDoc) : null;
+		
+		return user;
+		
+	}
 }

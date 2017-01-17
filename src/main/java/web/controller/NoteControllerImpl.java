@@ -2,6 +2,7 @@ package web.controller;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -22,6 +23,7 @@ public class NoteControllerImpl implements NoteController{
 			.getDaoFactory(DaoFactory.MONGO_DATABASE)
 			.getNoteDao();
 
+	@RolesAllowed({"ADMIN", "USER"})
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public void addNote(Note note) {
@@ -44,12 +46,14 @@ public class NoteControllerImpl implements NoteController{
 		return noteDao.findById(_id);
 	}
 	
+	@RolesAllowed({"ADMIN", "USER"})
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	public void updateOneNote(Note note){
 		noteDao.updateOneToDb(note);
 	}
 	
+	@RolesAllowed({"ADMIN", "USER"})
 	@DELETE
 	@Path("{_id}")
 	@Produces(MediaType.APPLICATION_JSON)
