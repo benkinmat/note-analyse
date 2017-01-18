@@ -9,7 +9,7 @@ public interface NoteController {
 	public void addNote(Note note);
 	
 	public List<Note> getAllNotes();
-	
+	public List<Note> getNotesWithFields(List<String> fields);	
 	public Note getNoteById(String noteId);
 	
 	public void updateOneNote(Note note);

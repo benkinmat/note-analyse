@@ -20,6 +20,7 @@ public interface BlogDao {
 //	public void insertManyToDb(List<User> users);
 	
 	public List<Blog> findAll();	
+	public List<Blog> findAllWithFields(List<String> fields);
 	public Blog findById(String id);
 	
 	public void updateOneToDb(Blog blog);

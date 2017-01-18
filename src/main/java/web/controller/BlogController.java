@@ -10,6 +10,8 @@ public interface BlogController {
 	
 	public List<Blog> getAllBlogs();
 	
+	public List<Blog> getBlogsWithFields(List<String> fields);
+	
 	public Blog getBlogById(String blogId);
 	
 	public void updateBlog(Blog blog);

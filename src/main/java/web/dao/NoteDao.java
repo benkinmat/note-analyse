@@ -17,6 +17,7 @@ public interface NoteDao {
 //	public void insertManyUsersToDb(List<User> users);
 	
 	public List<Note> findAll();	
+	public List<Note> findAllWithFields(List<String> fields);
 	public Note findById(String id);
 	
 	public void updateOneToDb(Note note);

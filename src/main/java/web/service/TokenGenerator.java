@@ -29,7 +29,7 @@ public final class TokenGenerator {
 				        .withExpiresAt(new Date())
 				        .sign(Algorithm.HMAC256(sign));
 				
-				System.out.println(token);
+				System.out.println(user.getRole());
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -50,7 +50,7 @@ public final class TokenGenerator {
 		}
 	}
 	
-	public static final DecodedJWT verify(String token) throws IllegalArgumentException, UnsupportedEncodingException, JWTVerificationException{
+	public static final DecodedJWT verify(String token) throws NullPointerException, IllegalArgumentException, UnsupportedEncodingException, JWTVerificationException{
 		JWTVerifier verifier = JWT.require(Algorithm.HMAC256(sign))
 				.withIssuer(issuer)
 		        .acceptLeeway(leeway)

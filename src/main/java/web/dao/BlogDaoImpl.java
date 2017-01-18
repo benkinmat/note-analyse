@@ -9,6 +9,7 @@ import org.bson.types.ObjectId;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
 
 import web.model.Blog;
 import web.model.BlogFactory;
@@ -34,6 +35,29 @@ public class BlogDaoImpl implements BlogDao {
 				.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
 				.getCollection(BlogDao.MONGO_COLLECTION_BLOGS)
 				.find();
+		
+		documentIterator.forEach(new Block<Document>() {
+			
+			public void apply(Document document) {
+				// TODO Auto-generated method stub
+				blogs.add(BlogFactory.converDocumentToPojo(document));
+			}
+			
+		});
+		
+		return blogs;
+	}
+	
+	public List<Blog> findAllWithFields(List<String> fields) {
+		// TODO Auto-generated method stub
+		
+		final List<Blog> blogs = new ArrayList<Blog>();
+		
+		FindIterable<Document> documentIterator = MongoDaoFactory
+				.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
+				.getCollection(BlogDao.MONGO_COLLECTION_BLOGS)
+				.find()
+				.projection(Projections.include(fields));
 		
 		documentIterator.forEach(new Block<Document>() {
 			

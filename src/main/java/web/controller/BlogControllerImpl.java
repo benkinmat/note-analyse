@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import web.dao.BlogDao;
@@ -42,6 +43,16 @@ public class BlogControllerImpl implements BlogController{
 		// TODO Auto-generated method stub
 		
 		return blogDao.findAll();
+		
+	}
+	
+	@GET
+	@Path("/query")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Blog> getBlogsWithFields(@QueryParam("field") List<String> fields) {
+		// TODO Auto-generated method stub
+		
+		return blogDao.findAllWithFields(fields);
 		
 	}
 

@@ -9,6 +9,7 @@ import org.bson.types.ObjectId;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
 
 import web.model.Note;
 import web.model.NoteFactory;
@@ -35,6 +36,28 @@ public class NoteDaoImpl implements NoteDao{
 		
 		return notes;
 		
+	}
+	
+	public List<Note> findAllWithFields(List<String> fields){
+		// TODO Auto-generated method stub
+		final List<Note> notes = new ArrayList<Note>();
+		
+		FindIterable<Document> documentIterator = MongoDaoFactory
+				.getDatabase(MongoDaoFactory.mongoClientUri.getDatabase())
+				.getCollection(NoteDao.MONGO_COLLECTION_NOTES)
+				.find()
+				.projection(Projections.include(fields));
+		
+		documentIterator.forEach(new Block<Document>() {
+			
+			public void apply(Document document) {
+				// TODO Auto-generated method stub
+				notes.add(NoteFactory.converDocumentToPojo(document));
+			}
+			
+		});
+		
+		return notes;
 	}
 
 	public void deleteAll() {
