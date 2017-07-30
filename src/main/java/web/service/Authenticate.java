@@ -12,9 +12,10 @@ public final class Authenticate {
 		if (user != null){
 			//Generate jwt token
 			String token = TokenGenerator.getJwtToken(user);
+			System.out.println(token);
 			
 			//Sending email
-			EmailExchange.sendEmail(user.getEmail(), token);
+//			EmailExchange.sendEmail(user.getEmail(), token);
 		}
 	}
 	

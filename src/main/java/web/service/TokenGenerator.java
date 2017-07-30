@@ -26,10 +26,8 @@ public final class TokenGenerator {
 				token = JWT.create()
 				        .withIssuer(issuer)
 				        .withClaim(role, user.getRole())
-				        .withExpiresAt(new Date())
+//				        .withExpiresAt(new Date())
 				        .sign(Algorithm.HMAC256(sign));
-				
-				System.out.println(user.getRole());
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -54,7 +52,7 @@ public final class TokenGenerator {
 		JWTVerifier verifier = JWT.require(Algorithm.HMAC256(sign))
 				.withIssuer(issuer)
 		        .acceptLeeway(leeway)
-		        .acceptExpiresAt(exp)
+//		        .acceptExpiresAt(exp)
 				.build();
 		
 		return verifier.verify(token);

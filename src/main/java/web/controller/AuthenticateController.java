@@ -17,7 +17,9 @@ import web.service.Authenticate;
 
 @PermitAll
 @Path("/authenticate")
-public class AuthenticateCtrl {
+public class AuthenticateController{
+	
+//	@Inject HttpSession httpSession;
 	
 	UserDao userDao = DaoFactory
 			.getDaoFactory(DaoFactory.MONGO_DATABASE)

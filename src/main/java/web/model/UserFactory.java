@@ -8,7 +8,6 @@ import web.dao.UserDao;
 public class UserFactory {
 	
 	public static String getUserRole(String role){
-		System.out.println(role);
 		
 		if (role !=null) 
 			return role;
