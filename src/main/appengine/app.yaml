@@ -28,6 +28,9 @@ runtime_config:  # Optional
 
 beta_settings:
   java_quickstart: true
+  
+env_variables:
+  DBG_ENABLE: true
 
 manual_scaling:
   instances: 1
